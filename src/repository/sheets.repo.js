@@ -6,20 +6,20 @@ class SheetsRepo {
     const sheets = await getSheetsObject();
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: "Sheet1!A:A", // Only fetch ID column
+      range: "Sheet1!A:A", 
     });
 
     const rows = response.data.values;
 
     if (!rows || rows.length < 2) {
-      return 1; // Start from 1 if no data
+      return 1; 
     }
 
-    // Get the last valid (non-empty) ID
-    let lastRow = rows.filter((row) => row[0]).pop(); // Get last non-empty row
+   
+    let lastRow = rows.filter((row) => row[0]).pop(); 
 
     let lastId = parseInt(lastRow[0], 10);
-    return isNaN(lastId) ? 1 : lastId + 1; // Increment last ID
+    return isNaN(lastId) ? 1 : lastId + 1;
   }
 
   async getData() {
@@ -80,20 +80,13 @@ class SheetsRepo {
     const sheets = await getSheetsObject();
     const existingData = await this.getData();
 
-    // Find the row index (excluding headers)
     const rowIndex = existingData.findIndex(
       (row, index) => index !== 0 && row[0] == id
     );
     if (rowIndex === -1) {
       throw new Error(`No entry found with ID ${id}`);
     }
-
-    console.log(`Updating row at index: ${rowIndex + 1}`);
-
-    // Ensure updatedData is an array with values in correct order
     const updatedValues = [parseInt(id), ...updatedData];
-
-    // Update the correct row (Google Sheets is 1-based index)
     const updateRange = `Sheet1!A${rowIndex + 1}:G${rowIndex + 1}`;
 
     await sheets.spreadsheets.values.update({
@@ -102,8 +95,6 @@ class SheetsRepo {
       valueInputOption: "RAW",
       resource: { values: [updatedValues] },
     });
-
-    console.log(`✅ Data updated successfully for ID ${id}`);
   }
 
   async deleteData(id) {

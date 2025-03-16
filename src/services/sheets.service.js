@@ -3,23 +3,17 @@ const { SheetsRepo } = require("../repository/");
 const sheetsRepo = new SheetsRepo();
 
 class SheetsService {
-  constructor() {
-    this.headers = ["ID", "Name", "Email", "Gender", "Phone", "Branch", "Year"];
-  }
-
   async addData(data) {
     try {
       if (await sheetsRepo.findUserByEmail(data?.email)) {
         throw new Error("Email already used!");
       }
-
       if (await sheetsRepo.findUserByPhone(data?.phone)) {
         throw new Error("Phone already used!");
       }
-
       const nextId = await sheetsRepo.getNextId();
       const values = [
-        nextId, // Auto-incrementing ID
+        nextId,
         data.name,
         data.email,
         data.gender || "NA",
@@ -28,7 +22,6 @@ class SheetsService {
         data.year || "NA",
       ];
       await sheetsRepo.addData(values);
-      console.log("Data added successfully!");
     } catch (error) {
       throw error;
     }
@@ -88,11 +81,8 @@ class SheetsService {
         receivedData.branch || "",
         receivedData.year || "NA",
       ];
-
       await sheetsRepo.updateData(id, updatedData);
-      console.log(`✅ Data updated for ID ${id}`);
     } catch (error) {
-      console.error(`❌ Update failed: ${error.message}`);
       throw error;
     }
   }
@@ -100,7 +90,6 @@ class SheetsService {
   async deleteData(id) {
     try {
       await sheetsRepo.deleteData(id);
-      console.log(`Data deleted for ID ${id}`);
     } catch (error) {
       throw error;
     }
