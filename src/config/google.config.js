@@ -1,15 +1,14 @@
 const { google } = require("googleapis");
-const { SECRET_KEY_NAME } = require("./server.config");
-const path = require("path");
+const { GOOGLE_APPLICATION_CREDENTIALS_JSON } = require("./server.config");
 
-const keyFile = path.resolve(SECRET_KEY_NAME);
+const credentials = JSON.parse(GOOGLE_APPLICATION_CREDENTIALS_JSON);
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 
 let authInstance = null;
 
 async function getAuthToken() {
   if (!authInstance) {
-    authInstance = new google.auth.GoogleAuth({ keyFile, scopes: SCOPES });
+    authInstance = new google.auth.GoogleAuth({ credentials, scopes: SCOPES });
   }
   return authInstance.getClient();
 }

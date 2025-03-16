@@ -26,8 +26,11 @@ This project integrates with Google Sheets to add, retrieve, update, and delete 
    ```env
    PORT=3005
    SPREADSHEET_ID=your_google_sheet_id
-   SECRET_KEY_NAME=your-service-account-key.json
+   GOOGLE_APPLICATION_CREDENTIALS_JSON=paste_credential_directly_here
+
    ```
+   - Note: before pasting json file content remove the new lines by using this website 
+   - [Click Here](https://codebeautify.org/remove-line-breaks)
 
 4. Place your Google Service Account key JSON file inside the project root folder.
 
