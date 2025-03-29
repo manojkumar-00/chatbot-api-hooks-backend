@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.raw());
 
 app.get("/ping", (_, res) => {
+  console.log("Called server");
   res.status(StatusCodes.OK).json({
     message: `Sever is live at PORT:${PORT}`,
   });
