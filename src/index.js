@@ -5,12 +5,15 @@ const { StatusCodes } = require("http-status-codes");
 const { PORT } = require("./config/server.config");
 
 const apiRouter = require("./routes");
+const webhookRouter = require("./routes/webhook.routes");
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.raw());
+
+app.use("/webhook-apis", webhookRouter);
 
 app.get("/ping", (_, res) => {
   console.log("Called server");

@@ -140,6 +140,7 @@ async function deleteData(req, res) {
   }
 }
 
+
 module.exports = {
   addData,
   getData,

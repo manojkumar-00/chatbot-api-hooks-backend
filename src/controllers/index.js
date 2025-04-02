@@ -1,3 +1,3 @@
 module.exports = {
- sheetsController:require('./sheets.controller')
+  sheetsController: require("./sheets.controller"),
 };
