@@ -8,8 +8,10 @@ const {
 
 async function handleAllOperations(req, res) {
     try {
-      console.log("Called with params : ", req.query);
-      const purpose = req?.query?.purpose;
+        console.log("Called with params : ", req.query);
+        console.log("Called with req body: ", req.body);
+
+        const purpose = req?.query?.purpose;
       const data = req?.query?.data;
 
       const parsedData = data && JSON.parse(data);
