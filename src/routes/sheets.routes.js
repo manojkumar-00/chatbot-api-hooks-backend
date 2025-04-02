@@ -5,11 +5,11 @@ const sheetsRouter = express.Router();
 
 sheetsRouter.get("/", sheetsController.getData);
 
-sheetsRouter.post("/fetch-data/:id", sheetsController.getDataById);
+sheetsRouter.get("/:id", sheetsController.getDataById);
 
-sheetsRouter.post("/check-email/:email", sheetsController.findUserByEmail);
+sheetsRouter.get("/check-email/:email", sheetsController.findUserByEmail);
 
-sheetsRouter.post("/check-phone/:phone", sheetsController.findUserByPhone);
+sheetsRouter.get("/check-phone/:phone", sheetsController.findUserByPhone);
 
 sheetsRouter.post("/", sheetsController.addData);
 
